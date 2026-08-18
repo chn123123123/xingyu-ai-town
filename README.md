@@ -1,8 +1,8 @@
 # 星屿镇 AI Town
 
 > 候选人姓名：**请在提交前填写**  
-> 仓库地址：[GitHub - chn123123123/xingyu-ai-town](https://github.com/chn123123123/xingyu-ai-town)
-> 在线体验：[http://82.156.68.40:3001](http://82.156.68.40:3001)（腾讯云 Lighthouse 部署）
+> 代码仓库：[GitHub - chn123123123/xingyu-ai-town](https://github.com/chn123123123/xingyu-ai-town)（仅托管源码）
+> 在线体验：[http://82.156.68.40:3001](http://82.156.68.40:3001)（实际运行于腾讯云 Lighthouse）
 > 技术栈：Vue 3 + TypeScript + Vite / Node.js + Express / Vitest  
 > 实际投入时间：**请按实际情况填写**  
 > 完成情况：经典/动态 Canvas 双地图、3 位 NPC、4 类行动、服务端自主决策、可解释回合报告、NPC 相遇事件、小镇手记、后端任务系统、差异化对话、AI/Mock 双模式、可选持久化、响应式布局、Docker、12 项自动化测试  
@@ -164,7 +164,7 @@ docker compose up --build
 
 ## 部署到腾讯云 Lighthouse
 
-本项目已部署到腾讯云 Lighthouse 的 Ubuntu 实例。线上地址为 [http://82.156.68.40:3001](http://82.156.68.40:3001)。
+本项目实际运行在腾讯云 Lighthouse 的 Ubuntu 实例上，使用 Docker Compose 管理服务；GitHub 仅用于保存和同步源码。线上地址为 [http://82.156.68.40:3001](http://82.156.68.40:3001)。
 
 部署步骤如下：
 
@@ -202,12 +202,6 @@ curl http://localhost:3001/api/health
 ```
 
 健康检查返回 `{"ok":true,"mode":"AI"}` 表示容器运行正常，且真实 AI 模式已启用。
-
-## 部署到 Render
-
-仓库内的 `render.yaml` 已包含构建、启动、健康检查和 DeepSeek 配置。将项目推送到 GitHub 后，在 Render 选择 **New → Blueprint**，连接该仓库并部署。创建过程中只需填写秘密变量 `AI_API_KEY`，不要把密钥提交进 Git。
-
-部署成功后，Render 会提供形如 `https://xingyu-ai-town.onrender.com` 的在线体验地址。免费实例闲置后会休眠，首次访问可能需要等待约一分钟；免费实例没有持久磁盘，因此服务重启后小镇进度会恢复初始状态，适合作业演示但不用于正式生产。
 
 ## 技术取舍
 
