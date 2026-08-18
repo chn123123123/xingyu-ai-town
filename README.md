@@ -1,8 +1,8 @@
 # 星屿镇 AI Town
 
 > 候选人姓名：**请在提交前填写**  
-> 仓库地址：**请在提交前填写**  
-> 在线体验：未部署（本地可完整运行）  
+> 仓库地址：[GitHub - chn123123123/xingyu-ai-town](https://github.com/chn123123123/xingyu-ai-town)
+> 在线体验：[http://82.156.68.40:3001](http://82.156.68.40:3001)（腾讯云 Lighthouse 部署）
 > 技术栈：Vue 3 + TypeScript + Vite / Node.js + Express / Vitest  
 > 实际投入时间：**请按实际情况填写**  
 > 完成情况：经典/动态 Canvas 双地图、3 位 NPC、4 类行动、服务端自主决策、可解释回合报告、NPC 相遇事件、小镇手记、后端任务系统、差异化对话、AI/Mock 双模式、可选持久化、响应式布局、Docker、12 项自动化测试  
@@ -137,8 +137,8 @@ copy .env.example .env
 
 ```dotenv
 AI_API_KEY=your_key_here
-AI_BASE_URL=https://api.openai.com/v1
-AI_MODEL=gpt-4o-mini
+AI_BASE_URL=https://api.deepseek.com
+AI_MODEL=deepseek-chat
 AI_TIMEOUT_MS=15000
 ```
 
@@ -161,6 +161,47 @@ docker compose up --build
 ```
 
 访问 http://localhost:3001。Compose 默认打开持久化并使用命名卷保存数据。
+
+## 部署到腾讯云 Lighthouse
+
+本项目已部署到腾讯云 Lighthouse 的 Ubuntu 实例。线上地址为 [http://82.156.68.40:3001](http://82.156.68.40:3001)。
+
+部署步骤如下：
+
+```bash
+sudo apt-get update
+sudo apt-get install -y docker.io docker-compose-v2 git
+git config --global http.version HTTP/1.1
+git clone --depth 1 https://github.com/chn123123123/xingyu-ai-town.git
+cd xingyu-ai-town
+cp .env.example .env
+nano .env
+sudo docker compose up -d --build
+```
+
+在服务器 `.env` 中配置 `AI_API_KEY`、`AI_BASE_URL=https://api.deepseek.com`、`AI_MODEL=deepseek-chat` 与 `PERSIST_WORLD=true`。密钥仅保存在服务器，绝不提交到 Git 仓库。
+
+若 Docker Hub 拉取超时，可配置腾讯云镜像加速后重启 Docker：
+
+```bash
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json > /dev/null <<'EOF'
+{
+  "registry-mirrors": ["https://mirror.ccs.tencentyun.com"]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
+最后在 Lighthouse 实例的 **防火墙** 中新增入站规则：来源 `0.0.0.0/0`、协议 `TCP`、端口 `3001`、策略“允许”。部署验证：
+
+```bash
+sudo docker compose ps
+curl http://localhost:3001/api/health
+```
+
+健康检查返回 `{"ok":true,"mode":"AI"}` 表示容器运行正常，且真实 AI 模式已启用。
 
 ## 部署到 Render
 
