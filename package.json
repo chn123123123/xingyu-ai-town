@@ -1,0 +1,38 @@
+{
+  "name": "xingguang-ai-town",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -n server,web -c yellow,cyan \"npm:dev:server\" \"npm:dev:web\"",
+    "dev:server": "tsx watch server/index.ts",
+    "dev:web": "vite",
+    "build": "tsc -p server/tsconfig.json && vite build",
+    "start": "node dist-server/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "vue-tsc --noEmit",
+    "check": "npm run typecheck && npm test && npm run build"
+  },
+  "dependencies": {
+    "@vitejs/plugin-vue": "latest",
+    "cors": "latest",
+    "dotenv": "latest",
+    "express": "latest",
+    "vue": "latest"
+  },
+  "devDependencies": {
+    "@types/cors": "latest",
+    "@types/express": "latest",
+    "@types/node": "latest",
+    "concurrently": "latest",
+    "jsdom": "latest",
+    "supertest": "latest",
+    "@types/supertest": "latest",
+    "tsx": "latest",
+    "typescript": "5.9.3",
+    "vite": "latest",
+    "vitest": "latest",
+    "vue-tsc": "3.3.10"
+  }
+}

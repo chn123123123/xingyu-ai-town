@@ -1,0 +1,13 @@
+services:
+  ai-town:
+    build: .
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: 3001
+      PERSIST_WORLD: "true"
+    volumes:
+      - town-data:/app/.data
+
+volumes:
+  town-data:
