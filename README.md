@@ -1,6 +1,6 @@
 # 星屿镇 AI Town
 
-> 候选人姓名：**请在提交前填写**  
+> 候选人姓名：陈浩楠  
 > 代码仓库：[GitHub - chn123123123/xingyu-ai-town](https://github.com/chn123123123/xingyu-ai-town)（仅托管源码）
 > 在线体验：[http://82.156.68.40:3001](http://82.156.68.40:3001)（实际运行于腾讯云 Lighthouse）
 > 技术栈：Vue 3 + TypeScript + Vite / Node.js + Express / Vitest  
